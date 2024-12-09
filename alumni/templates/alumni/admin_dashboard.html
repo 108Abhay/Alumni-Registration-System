@@ -1,0 +1,41 @@
+
+{% extends 'alumni/base.html' %}
+
+{% block content %}
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h2>Admin Dashboard - Pending Alumni Profiles</h2>
+        <a href="{% url 'generate_registration_link' %}" class="btn" style="background-color: #28a745;">
+            Generate Registration Link
+        </a>
+    </div>
+    
+    {% if profiles %}
+    <table style="width: 100%; border-collapse: collapse;">
+        <thead>
+            <tr style="background-color: #f2f2f2;">
+                <th style="padding: 10px; border: 1px solid #ddd;">Name</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Email</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Graduation Year</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Profession</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for profile in profiles %}
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd;">{{ profile.full_name }}</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">{{ profile.email }}</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">{{ profile.graduation_year }}</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">{{ profile.profession }}</td>
+                    <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">
+                        <a href="{% url 'approve_profile' profile.id %}" class="btn btn-approve">Approve</a>
+                        <a href="{% url 'reject_profile' profile.id %}" class="btn btn-reject">Reject</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>No pending alumni profiles.</p>
+    {% endif %}
+{% endblock %}

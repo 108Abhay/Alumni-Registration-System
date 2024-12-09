@@ -1,0 +1,27 @@
+{% extends 'alumni/base.html' %}
+
+{% block content %}
+    <h2>Alumni Directory</h2>
+    
+    {% if alumni %}
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+            {% for alumnus in alumni %}
+                <div style="width: 200px; margin: 10px; text-align: center;">
+                    {% if alumnus.profile_picture %}
+                        <img src="{{ alumnus.profile_picture.url }}" alt="{{ alumnus.full_name }}" style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%;">
+                    {% else %}
+                        <div style="width: 150px; height: 150px; background-color: #ddd; border-radius: 50%; margin: 0 auto;"></div>
+                    {% endif %}
+                    <h3>
+                        <a href="{% url 'alumni_profile_detail' alumnus.id %}">
+                            {{ alumnus.full_name }}
+                        </a>
+                    </h3>
+                    <p>{{ alumnus.profession }} ({{ alumnus.graduation_year }})</p>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No alumni profiles have been approved yet.</p>
+    {% endif %}
+{% endblock %}

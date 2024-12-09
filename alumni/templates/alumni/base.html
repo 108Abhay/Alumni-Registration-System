@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}SGGS College Alumni Network{% endblock %}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            padding: 20px;
+        }
+        .navbar {
+            background-color: #333;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+        }
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        .content {
+            background-color: white;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .messages {
+            margin-bottom: 20px;
+        }
+        .messages .success {
+            background-color: #dff0d8;
+            color: #3c763d;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .messages .error {
+            background-color: #f2dede;
+            color: #a94442;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        form {
+            max-width: 500px;
+            margin: auto;
+        }
+        form input, form select, form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn-approve {
+            background-color: #28a745;
+        }
+        .btn-reject {
+            background-color: #dc3545;
+        }
+    </style>
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <div class="navbar">
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'alumni_directory' %}">Alumni Directory</a>
+        <a href="{% url 'register_alumni' %}">Register</a>
+        {% if user.is_superuser %}
+            <a href="{% url 'admin_dashboard' %}">Admin Dashboard</a>
+            <a href="{% url 'admin_logout' %}">Logout</a>
+        {% else %}
+            <a href="{% url 'admin_login' %}">Admin Login</a>
+        {% endif %}
+    </div>
+
+    <div class="container">
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <div class="content">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+</body>
+</html>

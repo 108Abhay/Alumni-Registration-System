@@ -1,0 +1,22 @@
+{% extends 'alumni/base.html' %}
+
+{% block content %}
+    <h2>Alumni Registration Form</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        {% for field in form %}
+            <div>
+                {{ field.label_tag }}
+                {{ field }}
+                {% if field.errors %}
+                    <div style="color: red;">
+                        {{ field.errors }}
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+        
+        <button type="submit" class="btn">Submit Registration</button>
+    </form>
+{% endblock %}

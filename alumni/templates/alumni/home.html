@@ -1,0 +1,11 @@
+{% extends 'alumni/base.html' %}
+
+{% block content %}
+    <h1>Welcome to SGGS College Alumni Network!</h1>
+    <p>Connect with fellow alumni, share your experiences, and stay updated with your alma mater.</p>
+    
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="{% url 'alumni_directory' %}" class="btn">View Alumni Directory</a>
+        <a href="{% url 'register_alumni' %}" class="btn">Register as Alumni</a>
+    </div>
+{% endblock %}

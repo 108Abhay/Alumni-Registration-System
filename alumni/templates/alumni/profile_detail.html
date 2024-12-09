@@ -1,0 +1,33 @@
+<!-- alumni/templates/alumni/profile_detail.html -->
+{% extends 'alumni/base.html' %}
+
+{% block content %}
+    <div style="display: flex; align-items: center; margin-bottom: 20px;">
+        {% if alumni.profile_picture %}
+            <img src="{{ alumni.profile_picture.url }}" alt="{{ alumni.full_name }}" style="width: 200px; height: 200px; object-fit: cover; border-radius: 50%; margin-right: 20px;">
+        {% endif %}
+        <div>
+            <h2>{{ alumni.full_name }}</h2>
+            <p><strong>Graduation Year:</strong> {{ alumni.graduation_year }}</p>
+            <p><strong>Profession:</strong> {{ alumni.profession }}</p>
+
+            {% if alumni.email %}
+                <p><strong>Email:</strong> {{ alumni.email }}</p>
+            {% endif %}
+
+            {% if alumni.phone_number %}
+                <p><strong>Phone Number:</strong> {{ alumni.phone_number }}</p>
+            {% endif %}
+
+            {% if alumni.address %}
+                <p><strong>Address:</strong> {{ alumni.address }}</p>
+            {% endif %}
+
+            {% if alumni.experience %}
+                <p><strong>Experience:</strong> {{ alumni.experience }}</p>
+            {% endif %}
+
+            <p><strong>Gender:</strong> {{ alumni.get_gender_display }}</p>
+        </div>
+    </div>
+{% endblock %}

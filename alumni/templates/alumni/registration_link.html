@@ -1,0 +1,34 @@
+{% extends 'alumni/base.html' %}
+
+{% block content %}
+    <h2>Generate Registration Link</h2>
+    
+    <div style="background-color: #f4f4f4; padding: 20px; border-radius: 5px;">
+        <h3>Registration Link</h3>
+        <p>Share this unique link with the alumni who want to register:</p>
+        
+        <input type="text" id="registration-url" value="{{ registration_url }}" readonly style="width: 100%; padding: 10px; margin-bottom: 10px;">
+        
+        <button onclick="copyLink()" class="btn">Copy Link</button>
+    </div>
+
+    <script>
+        function copyLink() {
+            var copyText = document.getElementById('registration-url');
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); // For mobile devices
+            
+            document.execCommand('copy');
+            alert('Link copied to clipboard!');
+        }
+    </script>
+
+    <div style="margin-top: 20px;">
+        <h4>Important Notes:</h4>
+        <ul>
+            <li>This link is valid for 7 days</li>
+            <li>The link can only be used once</li>
+            <li>Only share this link with intended alumni</li>
+        </ul>
+    </div>
+{% endblock %}
